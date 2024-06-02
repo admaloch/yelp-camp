@@ -1,0 +1,100 @@
+<% layout('layouts/boilerplate')%>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" /><link
+        href="https://api.mapbox.com/mapbox-assembly/v1.3.0/assembly.min.css" rel="stylesheet">
+    <script id="search-js" defer="" src="https://api.mapbox.com/search-js/v1.0.0-beta.21/web.js"></script>
+    <link rel="stylesheet" href="/stylesheets/new.css">
+    <div class="row light-blue-bg pt-5 pb-2 px-2 rounded ">
+        <h1 class="text-center display-4">New Campground</h1>
+        <div class="">
+
+
+            <form id="campgroundForm" action="/campgrounds" method="POST" novalidate class="w-100 validated-form"
+                enctype="multipart/form-data" class="d-flex flex--column">
+                <div class="d-flex flex-column flex-lg-row">
+                    <div id="main-form" class="col-12 col-lg-7 d-flex justify-content-center">
+                        <div id="main-form-inputs" class="">
+                            <label class="form-label" for="title">Title</label>
+                            <input class="form-control mb-2" type="text" id="title" name="campground[title]" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <label class="form-label" for="price">Campground Price</label>
+                            <div class="input-group">
+                                <span class="input-group-text" id="price-label">$</span>
+                                <input type="text" class="form-control" id="price" placeholder="0.00" aria-label="price"
+                                    aria-describedby="price-label" name="campground[price]" required>
+                            </div>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <label class="form-label mt-2" for="description">Description</label>
+                            <textarea class="form-control mb-3" type="text" id="description"
+                                name="campground[description]" required></textarea>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="form-file custom-file">
+                                <input type="file" class="form-file-input" id="image" name="image" multiple>
+                                <label class="form-file-label" for="image">
+                                    <span class="form-file-text custom-file-label">Choose image(s)...</span>
+                                    <span class="form-file-button">Browse</span>
+                                </label>
+                            </div>
+                            <label class="my-2">Address</label>
+                            <input required class="input mb12" placeholder="Start typing your address, e.g. 123 Main..."
+                                autocomplete="address-line1" id="mapbox-autofill">
+
+                            <div id="manual-entry"
+                                class="d-none w180 mt6 link txt-ms border-b color-gray color-black-on-hover">
+                                Enter an address manually
+                            </div>
+                            <div class="secondary-inputs hide d-none">
+                                <label class="txt-s txt-bold color-gray mb3">City</label>
+                                <input name="campground[city]" class="input mb12" placeholder="City"
+                                    autocomplete="address-level2">
+                                <label class="txt-s txt-bold color-gray mb3">State / Region</label>
+                                <input name="campground[state]" class="input mb12" placeholder="State / Region"
+                                    autocomplete="address-level1">
+                                <label class="txt-s txt-bold color-gray mb3">ZIP / Postcode</label>
+                                <input name="campground[post]" class="input" placeholder="ZIP / Postcode"
+                                    autocomplete="postal-code">
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-12 col-lg-4 d-flex  justify-content-center align-items-center">
+                        <!-- Visual confirmation map -->
+                        <div id="minimap-container" class="none h240 w360 relative mt18"></div>
+                    </div>
+                </div>
+        </div>
+        <!-- Form buttons -->
+        <div class="mb30 submit-btns hide mt-3">
+            <button type="submit" class="custom-btn" id="btn-confirm">
+                Confirm
+            </button>
+            <button type="button" class="btn round d-none btn--gray-light" id="btn-reset">
+                Reset
+            </button>
+            <div id="validation-msg" class="ml-2 txt-m txt-bold none d-flex align-items-center">Test</div>
+        </div>
+        </form>
+
+        <div class="mb-4">
+            <a class="custom-link" href="/campgrounds">
+                <i class="fas fa-arrow-left"></i> All Campgrounds
+            </a>
+        </div>
+
+    </div>
+    </div>
+
+
+
+    <script>
+        const ACCESS_TOKEN = '<%-process.env.MAPBOX_TOKEN%>';
+    </script>
+
+    <script src="/javascripts/mapBoxAddress.js"></script>

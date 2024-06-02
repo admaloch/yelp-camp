@@ -1,0 +1,52 @@
+<% layout('layouts/boilerplate')%>
+    <link rel="stylesheet" href="/stylesheets/campgrounds.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+     <div
+        id="cluster-map">
+    </div>
+    <div class="container">
+        <h2 class="my-4">All Campgrounds</h2>
+
+        <% for (let campground of campgrounds){%>
+            <div class="card mb-3">
+                <div class="row">
+                    <div class="col-md-4">
+                        <%if(campground.images.length) {%>
+                            <img class="img-fluid" alt="" src="<%=campground.images[0].url%>">
+                            <% }else {%>
+                                <img class="img-fluid" alt=""
+                                    src="https://res.cloudinary.com/dtjqyxfsl/image/upload/v1715866910/image_not_found_zalczo.png">
+                                <% } %>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <%= campground.title %>
+                            </h5>
+
+                            <p class="card-text">
+                                <%= campground.description %>
+                            </p>
+                            <p class="card-text">
+                                <small class="text-muted">
+                                    <%= campground.location%>
+                                </small>
+                            </p>
+                            <a class="custom-btn" href="/campgrounds/<%=campground._id%>">View
+                                <%=campground.title%>
+                                    <i class="fas fa-arrow-right"></i>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% }%>
+    </div>
+    <script>
+        const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+        const campgrounds = { features: <%- JSON.stringify(campgrounds) %>}
+    </script>
+
+    <script src="/javascripts/clusterMap.js"></script>

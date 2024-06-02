@@ -1,0 +1,29 @@
+img {
+    width: 200px;
+    height: 130px;
+
+    
+}
+
+.edit-img {
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.edit-img.checked {
+    opacity: 0.6;
+}
+
+.form-check-inline {
+    display: none;
+}
+
+
+
+.form-content {
+    max-width: 700px;
+}
+
+.delete-img-title h4 {
+    font-size: 1rem;
+}

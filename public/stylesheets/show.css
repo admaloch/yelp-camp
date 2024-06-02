@@ -1,0 +1,17 @@
+.carousel-item img {
+    width: 100%;
+    height: 400px; /* Adjust the height to your desired value */
+    object-fit: cover;
+  }
+
+  .img-not-found{
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .camp-title {
+    color: #6f1d1b;
+    font-weight: bold;
+  }
+
+
